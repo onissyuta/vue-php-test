@@ -2,14 +2,12 @@
 class MessageDAO {
     private $db = null;
 
-    // コンストラクタ
     function __construct(){
         $this->db = new SQLite3('sqlite.db');
     }
 
-    // デストラクタ
     function __destruct(){
-        $this->db->close(); // 接続を閉じる
+        $this->db->close();
     }
 
     public function create($obj){
@@ -21,11 +19,15 @@ class MessageDAO {
 
     public function findAll(){
         $result = $this->db->query('SELECT * FROM message');
-        $resultObj = array();
+        $row = array();
+        $i = 0;
         while ($cols = $result->fetchArray()) { 
-            array_push($resultObj, new Message($cols[0], $cols[1], $cols[2]));
+            $row[$i]['id'] = $cols['id'];
+            $row[$i]['name'] = $cols['name'];
+            $row[$i]['message'] = $cols['message'];
+            $i++;
         }
-        return $resultObj;
+        return $row;
     }
 
     public function deleteAll(){

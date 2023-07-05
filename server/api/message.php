@@ -4,8 +4,7 @@ class Message {
     private $name = "";
     private $message = "";
 
-    function __construct($id, $name, $message){
-        $this->id = $id;
+    function __construct($name, $message){
         $this->name = $name;
         $this->message = $message;
     }
