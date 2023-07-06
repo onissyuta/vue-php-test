@@ -10,10 +10,10 @@ class MessageDAO {
         $this->db->close();
     }
 
-    public function create($obj){
+    public function create($name, $message){
         $pstmt = $this->db->prepare('INSERT INTO message (name, message) VALUES (:name, :message)');
-        $pstmt->bindValue(':name', $obj->getName());
-        $pstmt->bindValue(':message', $obj->getMessage());
+        $pstmt->bindValue(':name', $name);
+        $pstmt->bindValue(':message', $message);
         $pstmt->execute();
     }
 
