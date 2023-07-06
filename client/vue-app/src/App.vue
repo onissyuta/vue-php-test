@@ -4,11 +4,13 @@ import { ref } from 'vue'
 const name = ref("")
 const message = ref("")
 const serverData = ref("")
+const api = "http://localhost:800/api/index.php";
+
 
 fetchAllMessages();
 
 function fetchAllMessages(){
-    fetch("http://localhost:800/api/index.php")
+    fetch(api)
     .then(
         r => r.json().then(json => {
           serverData.value = json;
@@ -18,7 +20,7 @@ function fetchAllMessages(){
 }
 
 function submit() {
-    fetch("http://localhost:800/api/index.php",
+    fetch(api,
         {
             "method": "POST",
             "body": `name=${name.value}&message=${message.value}`,
@@ -35,7 +37,7 @@ function submit() {
 }
 
 function clearAll(){
-    fetch("http://localhost:800/api/index.php",
+    fetch(api,
         {
             "method": "DELETE"
         }
