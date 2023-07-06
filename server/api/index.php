@@ -3,7 +3,12 @@ require_once('Message.php');
 require_once('MessageDAO.php');
 
 header('content-type: application/json; charset=utf-8');
-header("Access-Control-Allow-Origin: *"); // クロスオリジン許可
+
+// クロスオリジン許可（セキュリティ的には危険なので要検討）
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: *");
+header('Access-Control-Allow-Methods: GET,POST,PUT,DELETE');
+
 
 $db = new MessageDAO();
 
@@ -18,9 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 }
 
 
-
 /*
-データベース作成
+初回時のデータベース作成用
 $db->exec('CREATE TABLE message (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT,
